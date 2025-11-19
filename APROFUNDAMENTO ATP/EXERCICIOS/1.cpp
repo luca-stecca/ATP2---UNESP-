@@ -1,14 +1,35 @@
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
 int main(){
+    
+    FILE *arq;
+    char nome[100];
 
-   char string[100];
-   int tamanho;
+    arq = fopen("nomes.txt","w");
 
-   printf("DIGITE SUA STRING: ");
-   fgets(string, sizeof(string), stdin);
-   tamanho = strlen(string);
+    if (arq == NULL){
+        printf("ERRO AO ABRIR ARQUIVO\n");
+        return 1;
+    }
 
-   printf("SUA STRING TEM %d CARACTERES", tamanho);
+    printf("ESCREVA 5 NOMES:\n");
+
+    for(int i=0; i < 5; i++){
+
+    printf("%d NOME: ", i+1);
+    fgets(nome, sizeof(nome), stdin);
+    fprintf(arq, "%s", nome);
+
+    }
+
+    if (arq != NULL){
+        printf("NOMES ESCRITOS COM SUCESSO!\n");
+    } else {
+        printf("ERRO AO ESCREVER OS NOMES\n");
+    }
+
+    fclose(arq);
+
+    return 0;
 }

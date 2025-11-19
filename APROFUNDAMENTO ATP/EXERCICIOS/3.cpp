@@ -1,25 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 int main(){
-    char string[100];
-    char vogais[] = "aeiou";
-    int tamanho = 0, contador = 0;
+    FILE *arq;
+    char linha[100];
+    int cont = 0;
 
-    printf("DIGITE SUA STRING: \n");
-    fgets(string, sizeof(string), stdin);
+    arq = fopen("nomes.txt","r");
 
-    tamanho = strlen(string);
-
-    for(int j = 0; j < 5; j++){
-        for(int i = 0; i < tamanho; i++){
-            if (string[i] == vogais[j]){
-                contador = contador + 1;
-            }
-        }
+    if(arq == NULL){
+        printf("ERRO AO ABRIR ARQUIVO");
     }
 
-    printf("SUA STRING TEM %d VOGAIS \n", contador);
+    while(fgets(linha, sizeof(linha), arq) != NULL){
+        cont = cont + 1;
+    }
 
+    printf("O SEU ARQUIVO TEM %d LINHAS", cont);
+    
+fclose(arq);
+return 0;
 }
